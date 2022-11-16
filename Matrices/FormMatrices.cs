@@ -1,4 +1,7 @@
-﻿namespace Matrices
+﻿using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
+
+namespace Matrices
 {
     public partial class FormMatrices : Form
     {
@@ -214,10 +217,15 @@
                 }
             }
 
+            groupBoxMatrizResultado.Controls.Clear();
+
+
             float[,] tempMatrizResultante = CalculoMatrices.MultiplicarMatrices(tempMatriz1, tempMatriz2);
             MatrizResultado = new TextBox[tempMatrizResultante.GetLength(0), tempMatrizResultante.GetLength(1)];
             int TamanhoText = groupBoxMatrizResultado.Width / MatrizResultado.GetLength(1);
+          
             groupBoxMatrizResultado.Controls.Clear();
+
             for (int x = 0; x < MatrizResultado.GetLength(0); x++)
             {
                 for (int y = 0; y < MatrizResultado.GetLength(1); y++)
@@ -228,9 +236,13 @@
                     MatrizResultado[x, y].Left = y * TamanhoText + 6;
                     MatrizResultado[x, y].Width = TamanhoText;
                     groupBoxMatrizResultado.Controls.Add(MatrizResultado[x, y]);
+
                 }
             }
         }
+
+   
+
 
         #endregion
 
@@ -454,7 +466,7 @@
             }
             float[,] tempResultante = new float[Matriz1.GetLength(0), Matriz1.GetLength(1)];
             float[,] matrizAdjunta = new float[Matriz1.GetLength(0), Matriz1.GetLength(1)];
-            float[,] matrizCofatora = new float[Matriz1.GetLength(0), Matriz1.GetLength(1)];
+            float[,] matrizCofactor = new float[Matriz1.GetLength(0), Matriz1.GetLength(1)];
             float determinante = 0;
             if (tempResultante.GetLength(0) != 2 || tempResultante.GetLength(1) != 2)
             {
@@ -477,14 +489,14 @@
             Matriz Inversa(A) = (1/ Determinante(A)) * Matriz Adjunta(A)*/
             if (tempResultante.GetLength(0) == 2 && tempResultante.GetLength(1) == 2)
             {
-                matrizCofatora = CalculoMatrices.MatrizCofactor2x2(tempResultante);
-                matrizAdjunta = CalculoMatrices.Transpuesta(matrizCofatora);
+                matrizCofactor = CalculoMatrices.MatrizCofactor2x2(tempResultante);
+                matrizAdjunta = CalculoMatrices.Transpuesta(matrizCofactor);
                 determinante = CalculoMatrices.Determinante2x2(tempResultante);
             }
             else if (tempResultante.GetLength(0) == 3 && tempResultante.GetLength(1) == 3)
             {
-                matrizCofatora = CalculoMatrices.MatrizCofactor3x3(tempResultante);
-                matrizAdjunta = CalculoMatrices.Transpuesta(matrizCofatora);
+                matrizCofactor = CalculoMatrices.MatrizCofactor3x3(tempResultante);
+                matrizAdjunta = CalculoMatrices.Transpuesta(matrizCofactor);
                 determinante = CalculoMatrices.Determinante3x3(tempResultante);
             }
             else
@@ -778,6 +790,7 @@
             groupBoxMatriz2.Controls.Clear();
 
             groupBoxMatrizResultado.Controls.Clear();
+
         }
 
         private void btCerrar_Click(object sender, EventArgs e)
@@ -790,11 +803,6 @@
             CargarMatriz1();
 
             CargarMatriz2();
-        }
-
-        private void FormMatrices_Load(object sender, EventArgs e)
-        {
-
         }
 
         public FormMatrices()

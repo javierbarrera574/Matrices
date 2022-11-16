@@ -326,6 +326,7 @@
             this.groupBoxMatrizResultado.TabIndex = 2;
             this.groupBoxMatrizResultado.TabStop = false;
             this.groupBoxMatrizResultado.Text = "Resultado";
+            //this.groupBoxMatrizResultado.Enter += new System.EventHandler(this.groupBoxMatrizResultado_Enter);
             // 
             // groupBoxMatriz2
             // 
@@ -402,7 +403,7 @@
             this.Name = "FormMatrices";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "Calculadora de matrices";
-            this.Load += new System.EventHandler(this.FormMatrices_Load);
+            //this.Load += new System.EventHandler(this.FormMatrices_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
